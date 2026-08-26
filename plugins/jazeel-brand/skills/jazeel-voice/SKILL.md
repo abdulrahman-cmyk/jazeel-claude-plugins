@@ -1,6 +1,6 @@
 ---
 name: jazeel-voice
-description: "Apply Jazeel's official brand voice, company knowledge, terminology, and writing standards when creating or reviewing Arabic or English marketing content, product descriptions, social posts, customer responses, and corporate communications."
+description: Applies the official Jazeel brand voice, company knowledge, terminology, and writing standards when creating or reviewing Arabic or English marketing content, product descriptions, social posts, customer responses, and corporate communications.
 ---
 
 جزيل Jazeel
