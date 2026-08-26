@@ -1,0 +1,14 @@
+{
+  "name": "jazeel-marketplace",
+  "description": "Official Claude plugins for Jazeel Al-Ataa Trading Company",
+  "owner": {
+    "name": "Jazeel Al-Ataa Trading Company"
+  },
+  "plugins": [
+    {
+      "name": "jazeel-brand",
+      "source": "./plugins/jazeel-brand",
+      "description": "Official Jazeel brand voice, company knowledge, writing standards, products, and services"
+    }
+  ]
+}
