@@ -1,0 +1,818 @@
+<title>PACT ARC</title>
+<meta name="description" content="PACT ARC — شركة متخصصة في الدراسات القانونية وتشخيص وتقييم الوضع القانوني للمنشآت، واستشارات عقود الشركات." />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=El+Messiri:wght@400;500;600;700&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" />
+
+<style>
+/* ============================================================
+   PACT ARC — Homepage template ("The Legal Brief")
+   RTL · Arabic-first · theme-aware
+   ============================================================ */
+
+:root{
+  /* light / porcelain page */
+  --paper:#F2F4F5;
+  --surface:#FFFFFF;
+  --surface-2:#ECEFF1;
+  --ink:#14212C;
+  --ink-soft:#4B5A66;
+  --ink-faint:#7C8A95;
+  --line:#DBE0E4;
+  --line-strong:#C7CED3;
+
+  /* brand grounds (hero / footer) — always dark in every theme */
+  --brand:#0E2436;
+  --brand-deep:#0A1926;
+  --on-brand:#EAEDEF;
+  --on-brand-soft:#9DACB7;
+  --on-brand-line:rgba(255,255,255,.12);
+
+  --brass:#A98A5B;
+  --brass-deep:#8C6E42;
+  --brass-tint:rgba(169,138,91,.14);
+
+  --hero-bg:#0E2436;
+  --hero-bg-2:#0A1926;
+  --hero-ink:#EDEFF1;
+  --hero-ink-soft:#9DACB7;
+  --hero-line:rgba(255,255,255,.12);
+
+  --maxw:1200px;
+  --gut:clamp(20px,5vw,72px);
+  --radius:2px;
+
+  --f-display:"El Messiri","IBM Plex Sans Arabic",serif;
+  --f-body:"IBM Plex Sans Arabic",system-ui,sans-serif;
+  --f-latin:"Cormorant Garamond",Georgia,serif;
+
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --paper:#0B1620;
+    --surface:#0F1E2A;
+    --surface-2:#132433;
+    --ink:#E7ECEF;
+    --ink-soft:#9FAEB9;
+    --ink-faint:#71828E;
+    --line:#1E3140;
+    --line-strong:#284256;
+
+    --brand:#0C1E2D;
+    --brand-deep:#081521;
+    --on-brand:#E7ECEF;
+    --on-brand-soft:#93A2AD;
+    --on-brand-line:rgba(255,255,255,.10);
+
+    --brass:#C2A16B;
+    --brass-deep:#A98A5B;
+    --brass-tint:rgba(194,161,107,.16);
+
+    --hero-bg:#0C1E2D;
+    --hero-bg-2:#081521;
+    --hero-ink:#E7ECEF;
+    --hero-ink-soft:#93A2AD;
+    --hero-line:rgba(255,255,255,.10);
+  }
+}
+
+:root[data-theme="dark"]{
+  --paper:#0B1620;
+  --surface:#0F1E2A;
+  --surface-2:#132433;
+  --ink:#E7ECEF;
+  --ink-soft:#9FAEB9;
+  --ink-faint:#71828E;
+  --line:#1E3140;
+  --line-strong:#284256;
+
+  --brand:#0C1E2D;
+  --brand-deep:#081521;
+  --on-brand:#E7ECEF;
+  --on-brand-soft:#93A2AD;
+  --on-brand-line:rgba(255,255,255,.10);
+
+  --brass:#C2A16B;
+  --brass-deep:#A98A5B;
+  --brass-tint:rgba(194,161,107,.16);
+
+  --hero-bg:#0C1E2D;
+  --hero-bg-2:#081521;
+  --hero-ink:#E7ECEF;
+  --hero-ink-soft:#93A2AD;
+  --hero-line:rgba(255,255,255,.10);
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  background:var(--paper);
+  color:var(--ink);
+  font-family:var(--f-body);
+  font-weight:400;
+  line-height:1.75;
+  font-size:clamp(15.5px,.55vw + 14px,17px);
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+}
+a{color:inherit;text-decoration:none}
+h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:600;line-height:1.28;text-wrap:balance;letter-spacing:-.01em}
+p{margin:0}
+img{max-width:100%}
+::selection{background:var(--brass);color:#fff}
+:focus-visible{outline:2px solid var(--brass);outline-offset:3px;border-radius:1px}
+
+/* ---------- shared bits ---------- */
+.wrap{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut)}
+.eyebrow{
+  font-family:var(--f-latin);
+  font-size:.86rem;letter-spacing:.32em;text-transform:uppercase;
+  color:var(--brass-deep);font-weight:600;
+  display:inline-flex;align-items:center;gap:.7em;
+}
+.eyebrow::before{content:"";inline-size:26px;block-size:1px;background:var(--brass);opacity:.8}
+.idx{
+  font-family:var(--f-latin);font-weight:500;font-style:italic;
+  font-size:1.15rem;color:var(--brass-deep);letter-spacing:.02em;
+  font-variant-numeric:tabular-nums;
+}
+.btn{
+  --bg:var(--brand);--fg:var(--on-brand);--bd:var(--brand);
+  display:inline-flex;align-items:center;gap:.6em;
+  font-family:var(--f-body);font-weight:500;font-size:.96rem;
+  padding:.85em 1.55em;border-radius:var(--radius);
+  background:var(--bg);color:var(--fg);border:1px solid var(--bd);
+  cursor:pointer;transition:transform .35s var(--ease),background .3s var(--ease),color .3s var(--ease),border-color .3s var(--ease);
+  white-space:nowrap;
+}
+.btn .ar{display:inline-block;transition:transform .35s var(--ease)}
+.btn:hover{transform:translateY(-2px)}
+.btn:hover .ar{transform:translateX(-4px)}
+.btn--ghost{--bg:transparent;--fg:var(--ink);--bd:var(--line-strong)}
+.btn--ghost:hover{--bd:var(--brass);--fg:var(--brass-deep)}
+.btn--brass{--bg:var(--brass);--fg:#fff;--bd:var(--brass)}
+.btn--brass:hover{--bg:var(--brass-deep);--bd:var(--brass-deep)}
+.btn--onbrand-ghost{--bg:transparent;--fg:var(--hero-ink);--bd:var(--hero-line)}
+.btn--onbrand-ghost:hover{--bd:var(--brass);--fg:#fff}
+
+/* arrow glyph flips for RTL (points to reading start = left) */
+.ar{font-family:var(--f-latin)}
+
+/* ---------- wordmark / logo ---------- */
+.logo{display:inline-flex;flex-direction:column;gap:.28em;line-height:1;color:inherit}
+.logo__row{display:flex;align-items:flex-start;gap:.14em}
+.logo__word{
+  font-family:var(--f-latin);font-weight:400;
+  letter-spacing:.16em;font-size:1.62rem;line-height:.9;
+}
+.logo__word .apex{position:relative}
+.logo__sup{
+  font-family:var(--f-latin);font-weight:500;
+  font-size:.62rem;letter-spacing:.24em;
+  margin-block-start:.15em;color:var(--brass-deep);
+}
+.logo__tag{
+  font-family:var(--f-latin);font-weight:500;
+  font-size:.52rem;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--ink-faint);
+}
+.logo--onbrand .logo__tag{color:var(--hero-ink-soft)}
+.logo--onbrand .logo__sup{color:var(--brass)}
+
+/* ============================================================ HEADER */
+.site-head{
+  position:sticky;top:0;z-index:60;
+  background:color-mix(in srgb,var(--paper) 88%,transparent);
+  backdrop-filter:blur(14px) saturate(1.2);
+  border-block-end:1px solid var(--line);
+  transition:box-shadow .3s var(--ease);
+}
+.site-head[data-scrolled="true"]{box-shadow:0 1px 0 var(--line),0 18px 40px -34px rgba(10,25,38,.5)}
+.head-inner{
+  max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut);
+  block-size:78px;display:flex;align-items:center;justify-content:space-between;gap:2rem;
+}
+.nav{display:flex;align-items:center;gap:2.1rem}
+.nav a{
+  font-size:.95rem;color:var(--ink-soft);font-weight:400;position:relative;
+  padding-block:.4em;transition:color .25s var(--ease);
+}
+.nav a::after{
+  content:"";position:absolute;inset-inline:0;inset-block-end:-2px;block-size:1px;
+  background:var(--brass);transform:scaleX(0);transform-origin:right;
+  transition:transform .3s var(--ease);
+}
+.nav a:hover{color:var(--ink)}
+.nav a:hover::after,.nav a[aria-current]::after{transform:scaleX(1)}
+.nav a[aria-current]{color:var(--ink)}
+.head-cta{display:flex;align-items:center;gap:1.1rem}
+.menu-btn{display:none}
+
+/* ============================================================ HERO */
+.hero{
+  position:relative;overflow:hidden;isolation:isolate;
+  background:
+    radial-gradient(120% 90% at 88% -10%,rgba(169,138,91,.10),transparent 55%),
+    linear-gradient(180deg,var(--hero-bg) 0%,var(--hero-bg-2) 100%);
+  color:var(--hero-ink);
+}
+.hero__grid{
+  position:absolute;inset:0;z-index:-1;opacity:.5;
+  background-image:linear-gradient(var(--hero-line) 1px,transparent 1px),
+                   linear-gradient(90deg,var(--hero-line) 1px,transparent 1px);
+  background-size:100% 96px, 25% 100%;
+  -webkit-mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent);
+          mask-image:linear-gradient(180deg,transparent,#000 22%,#000 78%,transparent);
+}
+.hero__arc{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.hero__arc svg{position:absolute;inset-block-start:-6%;inset-inline-end:-8%;inline-size:min(60vw,760px);block-size:auto;opacity:.9}
+.hero__arc path{
+  fill:none;stroke:var(--brass);stroke-width:1;
+  stroke-dasharray:1400;stroke-dashoffset:1400;
+  animation:draw 2.6s var(--ease) .35s forwards;
+}
+@keyframes draw{to{stroke-dashoffset:0}}
+
+.hero__inner{
+  max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut);
+  padding-block:clamp(84px,15vh,168px) clamp(64px,11vh,120px);
+  position:relative;
+}
+.hero .eyebrow{color:var(--brass)}
+.hero .eyebrow::before{background:var(--brass);opacity:1}
+.hero h1{
+  font-size:clamp(2.35rem,5.6vw,4.4rem);
+  line-height:1.14;font-weight:600;letter-spacing:-.02em;
+  margin-block:1.05em .1em;max-inline-size:15ch;color:#fff;
+}
+.hero__lead{
+  color:var(--hero-ink-soft);font-size:clamp(1.02rem,1.4vw,1.2rem);
+  line-height:1.85;max-inline-size:60ch;margin-block-start:1.3em;
+}
+.hero__cta{display:flex;flex-wrap:wrap;gap:.9rem;margin-block-start:2.4rem}
+.hero__trust{
+  display:flex;flex-wrap:wrap;align-items:center;gap:.55rem 1.3rem;
+  margin-block-start:clamp(2.6rem,6vh,4rem);
+  padding-block-start:1.6rem;border-block-start:1px solid var(--hero-line);
+  font-size:.9rem;color:var(--hero-ink-soft);
+}
+.hero__trust b{font-weight:500;color:var(--hero-ink)}
+.hero__trust .dot{inline-size:4px;block-size:4px;border-radius:50%;background:var(--brass)}
+
+/* ============================================================ SECTIONS */
+.section{padding-block:clamp(66px,10vh,120px);border-block-end:1px solid var(--line)}
+.section--tight{padding-block:clamp(54px,8vh,90px)}
+.sec-head{display:flex;flex-direction:column;gap:1.1rem;max-inline-size:56ch;margin-block-end:clamp(2.4rem,5vh,3.6rem)}
+.sec-head h2{font-size:clamp(1.7rem,3.2vw,2.6rem);color:var(--ink)}
+.sec-head .lead{color:var(--ink-soft);font-size:1.06rem;line-height:1.85}
+.sec-head__top{display:flex;align-items:baseline;gap:1.1rem}
+
+/* problem — prose + pullnote */
+.problem{display:grid;grid-template-columns:1.15fr .85fr;gap:clamp(2rem,5vw,4.5rem);align-items:start}
+.problem p + p{margin-block-start:1.2em}
+.problem .lead-em{color:var(--ink);font-size:1.14rem;font-weight:500;line-height:1.7}
+.pullnote{
+  border-inline-start:2px solid var(--brass);
+  padding:1.5rem 1.6rem;background:var(--surface);
+  border-radius:var(--radius);
+  box-shadow:0 24px 60px -48px rgba(10,25,38,.5);
+}
+.pullnote .k{font-family:var(--f-latin);font-style:italic;color:var(--brass-deep);font-size:1.05rem;display:block;margin-block-end:.5rem}
+.pullnote p{color:var(--ink-soft);font-size:.98rem;line-height:1.8}
+
+/* when we help — indexed rows */
+.rows{border-block-start:1px solid var(--line)}
+.row{
+  display:grid;grid-template-columns:minmax(210px,.9fr) 1.6fr;gap:1.4rem clamp(1.5rem,4vw,3.5rem);
+  padding-block:1.55rem;border-block-end:1px solid var(--line);
+  align-items:baseline;transition:background .3s var(--ease);
+  padding-inline:1rem;margin-inline:-1rem;border-radius:var(--radius);
+}
+.row:hover{background:var(--surface)}
+.row__t{display:flex;gap:1rem;align-items:baseline}
+.row__t h3{font-family:var(--f-display);font-weight:600;font-size:1.16rem;color:var(--ink)}
+.row__d{color:var(--ink-soft);font-size:1.01rem;line-height:1.8}
+
+/* services */
+.services{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.2rem,2.5vw,2rem)}
+.card{
+  position:relative;display:flex;flex-direction:column;
+  background:var(--surface);border:1px solid var(--line);
+  border-radius:var(--radius);padding:clamp(1.9rem,3vw,2.7rem);
+  transition:transform .4s var(--ease),border-color .3s var(--ease),box-shadow .4s var(--ease);
+  overflow:hidden;
+}
+.card::before{content:"";position:absolute;inset-block-start:0;inset-inline:0;block-size:2px;background:var(--brass);transform:scaleX(0);transform-origin:right;transition:transform .45s var(--ease)}
+.card:hover{transform:translateY(-4px);border-color:var(--line-strong);box-shadow:0 40px 80px -60px rgba(10,25,38,.6)}
+.card:hover::before{transform:scaleX(1)}
+.card__tag{font-family:var(--f-latin);font-style:italic;color:var(--brass-deep);font-size:1rem;margin-block-end:.9rem}
+.card--primary .card__tag{color:var(--brass-deep)}
+.card h3{font-size:clamp(1.35rem,2.2vw,1.7rem);color:var(--ink);margin-block-end:.9rem;line-height:1.3}
+.card p{color:var(--ink-soft);font-size:1.01rem;line-height:1.82}
+.card__link{
+  margin-block-start:auto;padding-block-start:1.6rem;display:inline-flex;align-items:center;gap:.5em;
+  font-weight:500;color:var(--ink);font-size:.98rem;transition:gap .3s var(--ease),color .3s var(--ease);
+}
+.card__link .ar{color:var(--brass-deep)}
+.card:hover .card__link{gap:.9em;color:var(--brass-deep)}
+.card--primary{background:linear-gradient(180deg,var(--surface),color-mix(in srgb,var(--brass-tint) 40%,var(--surface)))}
+.chip{
+  position:absolute;inset-block-start:clamp(1.9rem,3vw,2.7rem);inset-inline-start:clamp(1.9rem,3vw,2.7rem);
+  font-family:var(--f-latin);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;
+  color:var(--brass-deep);border:1px solid var(--brass);border-radius:100px;padding:.3em 1em;font-weight:600;
+}
+
+/* methodology */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border-block:1px solid var(--line)}
+.step{padding:2rem 1.5rem 2.2rem;border-inline-start:1px solid var(--line);position:relative}
+.step:first-child{border-inline-start:none}
+.step__n{font-family:var(--f-latin);font-style:italic;font-size:2.5rem;font-weight:400;color:var(--brass-deep);line-height:1;opacity:.85}
+.step h3{font-family:var(--f-display);font-weight:600;font-size:1.14rem;margin-block:1.1rem .6rem;color:var(--ink)}
+.step p{color:var(--ink-soft);font-size:.96rem;line-height:1.75}
+.step::after{content:"";position:absolute;inset-block-start:2rem;inset-inline-start:-3.5px;inline-size:6px;block-size:6px;border-radius:50%;background:var(--brass)}
+.step:first-child::after{display:none}
+
+/* principles */
+.principles{display:grid;grid-template-columns:repeat(4,1fr);gap:clamp(1.4rem,3vw,2.4rem)}
+.principle{border-block-start:2px solid var(--ink);padding-block-start:1.2rem}
+.principle h3{font-family:var(--f-display);font-weight:600;font-size:1.24rem;color:var(--ink);margin-block-end:.6rem}
+.principle p{color:var(--ink-soft);font-size:.98rem;line-height:1.78}
+
+/* insights */
+.insights-head{display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;margin-block-end:2.6rem}
+.ins-list{border-block-start:1px solid var(--line)}
+.ins{
+  display:grid;grid-template-columns:auto 1fr auto;gap:1.4rem;align-items:center;
+  padding-block:1.5rem;border-block-end:1px solid var(--line);
+  transition:padding-inline .3s var(--ease);padding-inline:1rem;margin-inline:-1rem;border-radius:var(--radius);
+}
+.ins:hover{background:var(--surface)}
+.ins__n{font-family:var(--f-latin);font-style:italic;color:var(--brass-deep);font-size:1.05rem;font-variant-numeric:tabular-nums}
+.ins__t{font-family:var(--f-display);font-weight:500;font-size:1.14rem;color:var(--ink);line-height:1.4}
+.ins__cat{font-family:var(--f-latin);font-style:italic;color:var(--ink-faint);font-size:.95rem;white-space:nowrap}
+.ins__go{color:var(--brass-deep);font-family:var(--f-latin);opacity:0;transform:translateX(6px);transition:.3s var(--ease)}
+.ins:hover .ins__go{opacity:1;transform:none}
+
+/* ============================================================ CLOSING CTA */
+.closing{
+  background:
+    radial-gradient(110% 120% at 85% 0%,rgba(169,138,91,.12),transparent 55%),
+    linear-gradient(180deg,var(--hero-bg-2),var(--hero-bg));
+  color:var(--hero-ink);text-align:center;position:relative;overflow:hidden;border:none;
+}
+.closing__inner{max-width:820px;margin-inline:auto;padding-inline:var(--gut);padding-block:clamp(72px,11vh,128px);position:relative;z-index:1}
+.closing .eyebrow{color:var(--brass);justify-content:center}
+.closing h2{font-size:clamp(1.9rem,4vw,3rem);color:#fff;margin-block:1em .6em;line-height:1.22}
+.closing p{color:var(--hero-ink-soft);font-size:1.08rem;line-height:1.85;max-inline-size:52ch;margin-inline:auto}
+.closing__cta{margin-block-start:2.3rem;display:flex;justify-content:center;gap:.9rem;flex-wrap:wrap}
+.closing__trust{
+  margin-block-start:2.8rem;display:flex;justify-content:center;gap:.6rem 1.4rem;flex-wrap:wrap;
+  font-family:var(--f-latin);font-style:italic;color:var(--hero-ink-soft);font-size:1rem;
+}
+.closing__trust span{display:inline-flex;align-items:center;gap:.9rem}
+.closing__trust .dot{inline-size:3px;block-size:3px;border-radius:50%;background:var(--brass)}
+
+/* ============================================================ FOOTER */
+.foot{background:var(--brand-deep);color:var(--on-brand);border:none}
+.foot__inner{max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gut);padding-block:clamp(56px,8vh,84px)}
+.foot__top{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:2.5rem;padding-block-end:3rem;border-block-end:1px solid var(--on-brand-line)}
+.foot__brand p{color:var(--on-brand-soft);font-size:.96rem;line-height:1.8;margin-block-start:1.4rem;max-inline-size:34ch}
+.foot col-h,.foot__col h4{font-family:var(--f-latin);font-style:italic;font-weight:500;color:var(--brass);font-size:1.05rem;margin-block-end:1.1rem;letter-spacing:.01em}
+.foot__col ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.75rem}
+.foot__col a{color:var(--on-brand-soft);font-size:.95rem;transition:color .25s var(--ease)}
+.foot__col a:hover{color:var(--on-brand)}
+.foot__contact div{color:var(--on-brand-soft);font-size:.95rem;line-height:1.7;margin-block-end:.7rem}
+.foot__contact .lbl{font-family:var(--f-latin);font-style:italic;color:var(--brass);font-size:.82rem;display:block}
+.foot__bottom{display:flex;justify-content:space-between;align-items:center;gap:1.5rem;flex-wrap:wrap;padding-block-start:2rem;font-size:.86rem;color:var(--on-brand-soft)}
+.foot__legal{display:flex;gap:1.4rem;flex-wrap:wrap}
+.foot__legal a:hover{color:var(--on-brand)}
+.foot__note{
+  margin-block-start:1.8rem;padding-block-start:1.6rem;border-block-start:1px solid var(--on-brand-line);
+  color:var(--on-brand-soft);font-size:.82rem;line-height:1.7;max-inline-size:92ch;
+}
+
+/* ---------- reveal ---------- */
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
+.reveal.in{opacity:1;transform:none}
+.reveal[data-d="1"]{transition-delay:.08s}
+.reveal[data-d="2"]{transition-delay:.16s}
+.reveal[data-d="3"]{transition-delay:.24s}
+
+/* ============================================================ RESPONSIVE */
+@media (max-width:1000px){
+  .nav{display:none}
+  .menu-btn{display:inline-flex}
+  .problem{grid-template-columns:1fr;gap:2rem}
+  .services{grid-template-columns:1fr}
+  .steps{grid-template-columns:1fr 1fr}
+  .step{border-inline-start:none;border-block-start:1px solid var(--line)}
+  .step:nth-child(odd){border-inline-end:1px solid var(--line)}
+  .step::after{display:none}
+  .principles{grid-template-columns:1fr 1fr}
+  .foot__top{grid-template-columns:1fr 1fr}
+  .foot__brand{grid-column:1/-1}
+}
+@media (max-width:640px){
+  .head-inner{block-size:66px}
+  .row{grid-template-columns:1fr;gap:.6rem}
+  .steps{grid-template-columns:1fr}
+  .step:nth-child(odd){border-inline-end:none}
+  .principles{grid-template-columns:1fr}
+  .foot__top{grid-template-columns:1fr}
+  .ins{grid-template-columns:auto 1fr;gap:.5rem 1rem}
+  .ins__cat{grid-column:2;font-size:.85rem}
+  .ins__go{display:none}
+  .hero__trust{flex-direction:column;align-items:flex-start;gap:.5rem}
+  .hero__trust .dot{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.001ms!important;transition-duration:.001ms!important}
+  .reveal{opacity:1;transform:none}
+  .hero__arc path{stroke-dashoffset:0}
+}
+
+/* ---------- mobile menu ---------- */
+.mobile-nav{position:fixed;inset:0;z-index:70;background:var(--brand);color:var(--on-brand);
+  display:flex;flex-direction:column;padding:1.4rem var(--gut) 2rem;transform:translateY(-100%);
+  transition:transform .5s var(--ease);visibility:hidden}
+.mobile-nav[data-open="true"]{transform:none;visibility:visible}
+.mobile-nav__top{display:flex;justify-content:space-between;align-items:center;block-size:78px}
+.mobile-nav nav{display:flex;flex-direction:column;gap:.2rem;margin-block-start:2rem}
+.mobile-nav nav a{font-family:var(--f-display);font-size:1.5rem;color:var(--on-brand);padding-block:.6rem;border-block-end:1px solid var(--on-brand-line)}
+.mobile-nav .btn{margin-block-start:2rem;justify-content:center}
+.iconbtn{background:none;border:1px solid var(--line-strong);color:var(--ink);inline-size:44px;block-size:40px;border-radius:var(--radius);cursor:pointer;font-size:1.1rem;display:inline-flex;align-items:center;justify-content:center}
+.mobile-nav .iconbtn{border-color:var(--on-brand-line);color:var(--on-brand)}
+</style>
+
+<header class="site-head" id="head">
+  <div class="head-inner">
+    <a href="#" class="logo" aria-label="PACT ARC — الصفحة الرئيسية">
+      <span class="logo__row">
+        <span class="logo__word">PACT</span>
+        <span class="logo__sup">ARC</span>
+      </span>
+      <span class="logo__tag">Legal Advisory · Due Diligence</span>
+    </a>
+
+    <nav class="nav" aria-label="التنقل الرئيسي">
+      <a href="#" aria-current="page">الرئيسية</a>
+      <a href="#services">الدراسات القانونية</a>
+      <a href="#services">استشارات العقود</a>
+      <a href="#how">كيف نعمل</a>
+      <a href="#about">عن PACT ARC</a>
+      <a href="#insights">الرؤى</a>
+    </nav>
+
+    <div class="head-cta">
+      <a href="#contact" class="btn btn--brass">اطلب لقاءً تمهيدياً <span class="ar">←</span></a>
+      <button class="iconbtn menu-btn" id="menuBtn" aria-label="القائمة" aria-expanded="false">☰</button>
+    </div>
+  </div>
+</header>
+
+<div class="mobile-nav" id="mobileNav" aria-hidden="true">
+  <div class="mobile-nav__top">
+    <span class="logo logo--onbrand">
+      <span class="logo__row"><span class="logo__word">PACT</span><span class="logo__sup">ARC</span></span>
+      <span class="logo__tag">Legal Advisory · Due Diligence</span>
+    </span>
+    <button class="iconbtn" id="menuClose" aria-label="إغلاق">✕</button>
+  </div>
+  <nav aria-label="التنقل للجوال">
+    <a href="#" data-close>الرئيسية</a>
+    <a href="#services" data-close>الدراسات القانونية</a>
+    <a href="#services" data-close>استشارات العقود</a>
+    <a href="#how" data-close>كيف نعمل</a>
+    <a href="#about" data-close>عن PACT ARC</a>
+    <a href="#insights" data-close>الرؤى</a>
+  </nav>
+  <a href="#contact" class="btn btn--brass" data-close>اطلب لقاءً تمهيدياً <span class="ar">←</span></a>
+</div>
+
+<!-- ============================================================ HERO -->
+<section class="hero">
+  <div class="hero__grid" aria-hidden="true"></div>
+  <div class="hero__arc" aria-hidden="true">
+    <svg viewBox="0 0 760 520" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M40 500 C 240 120, 520 120, 720 500" />
+      <path d="M150 500 C 300 240, 460 240, 610 500" opacity="0.5" />
+    </svg>
+  </div>
+  <div class="hero__inner">
+    <span class="eyebrow reveal">استشارات قانونية · العناية الواجبة</span>
+    <h1 class="reveal" data-d="1">رؤية قانونية واضحة قبل القرارات المفصلية</h1>
+    <p class="hero__lead reveal" data-d="2">
+      شركة متخصصة في الدراسات القانونية وتشخيص وتقييم الوضع القانوني للمنشآت. نحوّل
+      الوثائق والبيانات القانونية المتفرقة إلى تقرير تنفيذي مرجعي يوضّح الصورة، ويرتب
+      المخاطر بحسب أثرها وأولويتها، ويحدد فجوات المعلومات وخطوات المعالجة المقترحة.
+    </p>
+    <div class="hero__cta reveal" data-d="3">
+      <a href="#contact" class="btn btn--brass">اطلب لقاءً تمهيدياً <span class="ar">←</span></a>
+      <a href="#services" class="btn btn--onbrand-ghost">تعرّف إلى الدراسات القانونية</a>
+    </div>
+    <div class="hero__trust reveal" data-d="3">
+      <b>الدراسات القانونية</b><span class="dot"></span>
+      <b>تشخيص الوضع القانوني</b><span class="dot"></span>
+      <b>استشارات عقود الشركات</b>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 01 · PROBLEM -->
+<section class="section" id="problem">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-head__top"><span class="idx">01</span><span class="eyebrow">المشكلة التي نحلها</span></div>
+      <h2>وجود الوثائق لا يعني وضوح الصورة القانونية</h2>
+    </div>
+    <div class="problem">
+      <div class="reveal">
+        <p class="lead-em">
+          قد تكون لدى المنشأة عقودٌ والتزامات وقرارات ومراسلات ومطالبات نظامية متعددة —
+          لكنها لا تتجمع تلقائياً في صورة يمكن للإدارة أو المُموِّل أو المستثمر الاعتماد
+          عليها عند اتخاذ قرار مهم.
+        </p>
+        <p style="margin-block-start:1.3em;color:var(--ink-soft)">
+          وعندما تبقى البيانات القانونية موزّعة وغير مرتّبة، قد تتأخر القرارات أو تُبنى على
+          معلومات غير مكتملة. الأثر لا يظهر في لحظة الوثيقة، بل في لحظة القرار الذي يستند
+          إليها.
+        </p>
+      </div>
+      <aside class="pullnote reveal" data-d="1">
+        <span class="k">دور PACT ARC</span>
+        <p>
+          ننظّم هذه الصورة ونحوّلها إلى قراءة قانونية عملية توضّح المسائل والأولويات
+          وفجوات المعلومات ومسار المعالجة المقترح — لتكون أساساً موثوقاً للقرار.
+        </p>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 02 · WHEN -->
+<section class="section" id="when">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-head__top"><span class="idx">02</span><span class="eyebrow">متى نساعدك</span></div>
+      <h2>في اللحظات التي تحتاج فيها إلى صورة قانونية أوضح</h2>
+    </div>
+    <div class="rows">
+      <div class="row reveal">
+        <div class="row__t"><h3>التوسّع أو تغيّر النشاط</h3></div>
+        <p class="row__d">افهم الالتزامات والمسائل التي تستحق ترتيباً ومعالجة قبل التنفيذ.</p>
+      </div>
+      <div class="row reveal">
+        <div class="row__t"><h3>دخول شريك أو مستثمر</h3></div>
+        <p class="row__d">جهّز صورة قانونية واضحة للحوار والشفافية والفحص المتبادل.</p>
+      </div>
+      <div class="row reveal">
+        <div class="row__t"><h3>صفقة تمويل أو استحواذ</h3></div>
+        <p class="row__d">عرّف مسار العناية القانونية الواجبة المناسب لسياق الصفقة ونطاقها.</p>
+      </div>
+      <div class="row reveal">
+        <div class="row__t"><h3>تغيير إداري أو إعادة ترتيب</h3></div>
+        <p class="row__d">كوّن رؤية مشتركة للوضع القانوني والأولويات والمسؤوليات.</p>
+      </div>
+      <div class="row reveal">
+        <div class="row__t"><h3>تراكم العقود أو المطالبات</h3></div>
+        <p class="row__d">انتقل من ردّ الفعل إلى خطة معالجة مرتّبة وقابلة للمتابعة.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 03 · SERVICES -->
+<section class="section" id="services">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-head__top"><span class="idx">03</span><span class="eyebrow">خدماتنا</span></div>
+      <h2>خدمات مصمّمة للفهم والمعالجة والقرار</h2>
+      <p class="lead">خدمة رئيسة تُحوّل الوضع القانوني إلى قراءة واضحة، ومسار متخصص للعناية الواجبة عند ارتباط الدراسة بصفقة، إضافة إلى استشارات العقود.</p>
+    </div>
+    <div class="services">
+      <article class="card card--primary reveal">
+        <span class="chip">الخدمة الرئيسة</span>
+        <div class="card__tag">01 — Legal Studies</div>
+        <h3>الدراسات القانونية وتشخيص الوضع القانوني</h3>
+        <p>
+          دراسة منظّمة للمنشأة ضمن نطاق فحص محدّد: العقود والالتزامات النظامية والمنازعات
+          والمطالبات والهيكل والملكية والسياسات والوثائق ذات الصلة. ويشمل ذلك العناية
+          القانونية الواجبة كمسار متخصص عند ارتباط الدراسة بصفقة أو تمويل أو استحواذ.
+        </p>
+        <a href="#contact" class="card__link">اكتشف الخدمة الرئيسة <span class="ar">←</span></a>
+      </article>
+      <article class="card reveal" data-d="1">
+        <div class="card__tag">02 — Corporate Contracts</div>
+        <h3>استشارات عقود الشركات</h3>
+        <p>
+          نساعد الشركات على صياغة ومراجعة عقودها وتنظيم نماذجها وملحقاتها ومتابعة
+          التزاماتها ذات الأولوية ضمن نطاق واضح وقواعد استجابة محددة — لتبقى التعاقدات
+          عملية ومنضبطة.
+        </p>
+        <a href="#contact" class="card__link">استكشف استشارات العقود <span class="ar">←</span></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 04 · HOW -->
+<section class="section" id="how">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-head__top"><span class="idx">04</span><span class="eyebrow">كيف نعمل</span></div>
+      <h2>منهجية محدّدة من البداية إلى جلسة القرار</h2>
+    </div>
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step__n">01</div>
+        <h3>نفهم القرار</h3>
+        <p>نبدأ بتأهيل الاحتياج وفهم القرار الذي يستدعي الدراسة ومدى ملاءمة الخدمة.</p>
+      </div>
+      <div class="step reveal" data-d="1">
+        <div class="step__n">02</div>
+        <h3>نحدّد النطاق</h3>
+        <p>نحدّد محاور الفحص والوثائق والمقابلات والحدود والزمن قبل بدء العمل.</p>
+      </div>
+      <div class="step reveal" data-d="2">
+        <div class="step__n">03</div>
+        <h3>ننظّم ونحلّل</h3>
+        <p>نجمع المعلومات بطريقة منضبطة، ونفهرسها، ونطبّق معايير التحليل المناسبة.</p>
+      </div>
+      <div class="step reveal" data-d="3">
+        <div class="step__n">04</div>
+        <h3>نُسلّم وخريطة الأولويات</h3>
+        <p>نقدّم تقريراً تنفيذياً مرجعياً وخريطة مخاطر وخطوات معالجة مقترحة.</p>
+      </div>
+    </div>
+    <div style="margin-block-start:2.6rem" class="reveal">
+      <a href="#how" class="btn btn--ghost">تعرّف إلى منهجية العمل <span class="ar">←</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 05 · PRINCIPLES -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="sec-head__top"><span class="idx">05</span><span class="eyebrow">لماذا PACT ARC</span></div>
+      <h2>لأن المخرَج يجب أن يساعدك على الفعل</h2>
+      <p class="lead">لا نقيس جودة العمل بكثرة الملاحظات، بل بقدرتك على معرفة ما تعرفه، وما لا تعرفه، وما يمثّل خطراً فعلياً، وما ينبغي فعله الآن.</p>
+    </div>
+    <div class="principles">
+      <div class="principle reveal">
+        <h3>الدقّة</h3>
+        <p>نعمل ضمن نطاق مكتوب، ونوضّح الافتراضات والفجوات دون مبالغة في الوعود.</p>
+      </div>
+      <div class="principle reveal" data-d="1">
+        <h3>الوضوح</h3>
+        <p>نحوّل التعقيد إلى رؤية عملية تساعد على ترتيب الأولويات.</p>
+      </div>
+      <div class="principle reveal" data-d="2">
+        <h3>السرّية</h3>
+        <p>نحترم حساسية الوثائق والمعلومات، ونعالجها ضمن ترتيبات مهنية واضحة.</p>
+      </div>
+      <div class="principle reveal" data-d="3">
+        <h3>العملية</h3>
+        <p>نقدّم خطوات معالجة مقترحة ومساراً واضحاً للمتابعة والتنفيذ.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ 06 · INSIGHTS -->
+<section class="section section--tight" id="insights">
+  <div class="wrap">
+    <div class="insights-head">
+      <div class="sec-head reveal" style="margin:0">
+        <div class="sec-head__top"><span class="idx">06</span><span class="eyebrow">رؤى قانونية</span></div>
+        <h2>رؤى تساعد المنشآت على الاستعداد قبل القرار</h2>
+      </div>
+      <a href="#insights" class="btn btn--ghost reveal" data-d="1">اقرأ أحدث الرؤى <span class="ar">←</span></a>
+    </div>
+    <div class="ins-list">
+      <a href="#insights" class="ins reveal">
+        <span class="ins__n">01</span>
+        <span class="ins__t">ما الفرق بين وجود مستندات كثيرة وامتلاك صورة قانونية جاهزة للقرار؟</span>
+        <span class="ins__cat">تشخيص الوضع القانوني</span>
+        <span class="ins__go">←</span>
+      </a>
+      <a href="#insights" class="ins reveal" data-d="1">
+        <span class="ins__n">02</span>
+        <span class="ins__t">خمس إشارات تدل على أن منشأتك تحتاج إلى دراسة قانونية منظمة</span>
+        <span class="ins__cat">تشخيص الوضع القانوني</span>
+        <span class="ins__go">←</span>
+      </a>
+      <a href="#insights" class="ins reveal" data-d="2">
+        <span class="ins__n">03</span>
+        <span class="ins__t">متى تكون العناية القانونية الواجبة مناسبة لقرارك الاستثماري؟</span>
+        <span class="ins__cat">العناية الواجبة</span>
+        <span class="ins__go">←</span>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ CLOSING CTA -->
+<section class="closing" id="contact">
+  <div class="closing__inner">
+    <span class="eyebrow reveal">الدعوة الختامية</span>
+    <h2 class="reveal" data-d="1">هل تحتاج إلى صورة قانونية أوضح؟</h2>
+    <p class="reveal" data-d="2">
+      ابدأ لقاءً تمهيدياً مع PACT ARC لتحديد القرار الذي أمامك، ونطاق الدراسة المناسب،
+      والمعلومات اللازمة للانطلاق.
+    </p>
+    <div class="closing__cta reveal" data-d="2">
+      <a href="#contact" class="btn btn--brass">اطلب لقاءً تمهيدياً <span class="ar">←</span></a>
+      <a href="#services" class="btn btn--onbrand-ghost">استكشف خدماتنا</a>
+    </div>
+    <div class="closing__trust reveal" data-d="3">
+      <span>نطاق واضح</span><span class="dot"></span>
+      <span>مخرَج عملي</span><span class="dot"></span>
+      <span>سرّية منضبطة</span>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================ FOOTER -->
+<footer class="foot">
+  <div class="foot__inner">
+    <div class="foot__top">
+      <div class="foot__brand">
+        <span class="logo logo--onbrand">
+          <span class="logo__row"><span class="logo__word" style="color:#fff">PACT</span><span class="logo__sup">ARC</span></span>
+          <span class="logo__tag">Legal Advisory · Due Diligence</span>
+        </span>
+        <p>رؤية قانونية واضحة ومسنَّدة قبل القرارات المفصلية — للمنشآت التي تتخذ قراراتها على أساس منظّم.</p>
+      </div>
+      <div class="foot__col">
+        <h4>الخدمات</h4>
+        <ul>
+          <li><a href="#services">الدراسات القانونية</a></li>
+          <li><a href="#services">تشخيص الوضع القانوني</a></li>
+          <li><a href="#services">العناية القانونية الواجبة</a></li>
+          <li><a href="#services">استشارات عقود الشركات</a></li>
+        </ul>
+      </div>
+      <div class="foot__col">
+        <h4>الشركة</h4>
+        <ul>
+          <li><a href="#about">عن PACT ARC</a></li>
+          <li><a href="#how">كيف نعمل</a></li>
+          <li><a href="#insights">الرؤى القانونية</a></li>
+          <li><a href="#contact">تواصل معنا</a></li>
+        </ul>
+      </div>
+      <div class="foot__col foot__contact">
+        <h4>تواصل</h4>
+        <div><span class="lbl">البريد الإلكتروني</span>[ يُضاف بعد الاعتماد ]</div>
+        <div><span class="lbl">الهاتف</span>[ يُضاف بعد الاعتماد ]</div>
+        <div><span class="lbl">لينكدإن</span><a href="#">الحساب الرسمي</a></div>
+      </div>
+    </div>
+    <div class="foot__bottom">
+      <span>© 2026 PACT ARC — جميع الحقوق محفوظة.</span>
+      <div class="foot__legal">
+        <a href="#">سياسة الخصوصية</a>
+        <a href="#">الشروط والأحكام</a>
+        <a href="#">إخلاء المسؤولية المهني</a>
+      </div>
+    </div>
+    <p class="foot__note">
+      تنبيه مهني: المحتوى في هذا الموقع تعريفي وتسويقي، ولا يشكّل رأياً قانونياً أو وعداً
+      بنتيجة أو نطاقاً تعاقدياً. يُحدَّد نطاق كل مهمة وحدودها والتزامات الأطراف بموجب اتفاق
+      مكتوب وترتيبات مهنية مناسبة.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var head=document.getElementById('head');
+  var onScroll=function(){head.setAttribute('data-scrolled', window.scrollY>8 ? 'true':'false');};
+  onScroll(); window.addEventListener('scroll',onScroll,{passive:true});
+
+  // reveal on scroll
+  var reduce=window.matchMedia('(prefers-reduced-motion:reduce)').matches;
+  var els=document.querySelectorAll('.reveal');
+  if(reduce||!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});}
+  else{
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(en){ if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target);} });
+    },{threshold:.14,rootMargin:'0px 0px -8% 0px'});
+    els.forEach(function(e){io.observe(e);});
+  }
+
+  // mobile menu
+  var mob=document.getElementById('mobileNav');
+  var open=document.getElementById('menuBtn');
+  var close=document.getElementById('menuClose');
+  function set(o){mob.setAttribute('data-open',o?'true':'false');mob.setAttribute('aria-hidden',o?'false':'true');open.setAttribute('aria-expanded',o?'true':'false');document.body.style.overflow=o?'hidden':'';}
+  open.addEventListener('click',function(){set(true);});
+  close.addEventListener('click',function(){set(false);});
+  mob.querySelectorAll('[data-close]').forEach(function(a){a.addEventListener('click',function(){set(false);});});
+})();
+</script>
