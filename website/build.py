@@ -15,9 +15,9 @@ ASSETS = ROOT / "assets"
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com" />\n'
     '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n'
-    '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400'
-    '&family=Cinzel:wght@400;500;600&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700'
-    '&family=Inter:wght@300;400;500;600&display=swap" />')
+    '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600'
+    '&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700'
+    '&family=Inter:wght@300;400;500;600&family=Readex+Pro:wght@300;400;500;600;700&display=swap" />')
 
 ICON = ('<svg class="pa-icon" viewBox="0 0 60 74" aria-hidden="true">'
     '<path d="M5 71 L30 5 L55 71" fill="none" stroke="currentColor" stroke-width="3" '

@@ -1,7 +1,7 @@
 # PACT — Website
 
 Static, RTL, Arabic-first website for PACT (Legal Advisory | Due Diligence),
-built to the official brand identity (navy monochrome · Cinzel/Amiri · Inter/Plex Arabic).
+built to the official brand identity (navy monochrome · Cinzel/Readex Pro · Inter/Plex Arabic).
 
 ## Structure
 - `index.html`, `legal-studies.html`, `corporate-contracts.html`, `how-we-work.html`,
