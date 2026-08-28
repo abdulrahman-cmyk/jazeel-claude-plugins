@@ -439,3 +439,6 @@ img{max-width:100%}
   .assur{grid-template-columns:1fr}
   .figband{grid-template-columns:1fr;gap:1.6rem}
 }
+
+/* scroll progress bar */
+.scroll-prog{position:fixed;inset-block-start:0;inset-inline-start:0;block-size:2px;inline-size:0;background:var(--accent);z-index:80;pointer-events:none;will-change:width}
