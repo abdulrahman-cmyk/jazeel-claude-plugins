@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""PACT static site builder.
+"""PACT ARC static site builder.
 
 Assembles every page from shared partials (one header/footer definition) so
 the chrome stays identical across the site, then also emits a self-contained
@@ -16,8 +16,8 @@ ASSETS = ROOT / "assets"
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com" />\n'
     '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n'
     '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600'
-    '&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700'
-    '&family=Inter:wght@300;400;500;600&family=Readex+Pro:wght@300;400;500;600;700&display=swap" />')
+    '&family=IBM+Plex+Sans:wght@400;500;600;700'
+    '&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap" />')
 
 ICON = ('<svg class="pa-icon" viewBox="0 0 60 74" aria-hidden="true">'
     '<path d="M5 71 L30 5 L55 71" fill="none" stroke="currentColor" stroke-width="3" '
@@ -26,14 +26,14 @@ ICON = ('<svg class="pa-icon" viewBox="0 0 60 74" aria-hidden="true">'
 
 def wordmark(color=None):
     style = f' style="color:{color}"' if color else ''
-    return f'<span class="wordmark"{style}>P{ICON}C&#8202;T</span>'
+    return f'<span class="wordmark"{style}>P{ICON}C&#8202;T<span class="wordmark__arc">ARC</span></span>'
 
 NAV = [
     ("index.html", "الرئيسية"),
     ("legal-studies.html", "الدراسات القانونية"),
     ("corporate-contracts.html", "استشارات العقود"),
     ("how-we-work.html", "كيف نعمل"),
-    ("about.html", "عن PACT"),
+    ("about.html", "عن PACT ARC"),
     ("insights.html", "الرؤى"),
 ]
 
@@ -46,7 +46,7 @@ def header(active):
         f'<a href="{href}" data-close>{label}</a>' for href, label in NAV)
     return f'''<header class="site-head" id="head">
   <div class="head-inner">
-    <a href="index.html" class="logo" aria-label="PACT — الصفحة الرئيسية">
+    <a href="index.html" class="logo" aria-label="PACT ARC — الصفحة الرئيسية">
       {wordmark()}
       <span class="logo__tag">Legal Advisory &nbsp;|&nbsp; Due Diligence</span>
     </a>
@@ -101,7 +101,7 @@ FOOTER = f'''<footer class="foot">
         <li><a href="corporate-contracts.html">استشارات عقود الشركات</a></li>
       </ul></div>
       <div class="foot__col"><h4>الشركة</h4><ul>
-        <li><a href="about.html">عن PACT</a></li>
+        <li><a href="about.html">عن PACT ARC</a></li>
         <li><a href="how-we-work.html">كيف نعمل</a></li>
         <li><a href="insights.html">الرؤى القانونية</a></li>
         <li><a href="contact.html">تواصل معنا</a></li>
@@ -113,7 +113,7 @@ FOOTER = f'''<footer class="foot">
       </div>
     </div>
     <div class="foot__bottom">
-      <span>© 2026 PACT — جميع الحقوق محفوظة.</span>
+      <span>© 2026 PACT ARC — جميع الحقوق محفوظة.</span>
       <div class="foot__legal"><a href="#">سياسة الخصوصية</a><a href="#">الشروط والأحكام</a><a href="#">إخلاء المسؤولية المهني</a></div>
     </div>
     <p class="foot__note">تنبيه مهني: المحتوى في هذا الموقع تعريفي وتسويقي، ولا يشكّل رأياً قانونياً أو وعداً بنتيجة أو نطاقاً تعاقدياً. يُحدَّد نطاق كل مهمة وحدودها والتزامات الأطراف بموجب اتفاق مكتوب وترتيبات مهنية مناسبة.</p>
@@ -156,7 +156,7 @@ PAGES = {}
 
 # ---- legal-studies ----
 PAGES["legal-studies.html"] = dict(
-    title="الدراسات القانونية وتشخيص الوضع القانوني ￨ PACT",
+    title="الدراسات القانونية وتشخيص الوضع القانوني ￨ PACT ARC",
     desc="دراسة قانونية منظمة لتشخيص وتقييم الوضع القانوني للمنشآت، وترتيب المخاطر وفجوات المعلومات وخطوات المعالجة المقترحة.",
     active="legal-studies.html",
     body=page_hero("الدراسات القانونية", "الخدمة الرئيسة",
@@ -254,7 +254,7 @@ PAGES["legal-studies.html"] = dict(
 
 # ---- corporate-contracts ----
 PAGES["corporate-contracts.html"] = dict(
-    title="استشارات عقود الشركات ￨ PACT",
+    title="استشارات عقود الشركات ￨ PACT ARC",
     desc="دعم قانوني منظم لصياغة ومراجعة العقود وبناء حزم التعاقد وإدارة الالتزامات للشركات.",
     active="corporate-contracts.html",
     body=page_hero("استشارات العقود", "الخدمة الثانوية",
@@ -303,17 +303,17 @@ PAGES["corporate-contracts.html"] = dict(
 </section>
 '''
     + closing("لنبدأ من العقد الذي يستهلك وقت فريقك",
-        "تواصل مع PACT لمناقشة احتياجك التعاقدي وتحديد النطاق والمخرجات المناسبة.",
+        "تواصل مع PACT ARC لمناقشة احتياجك التعاقدي وتحديد النطاق والمخرجات المناسبة.",
         primary=("contact.html","ناقش احتياجك التعاقدي"), secondary=("legal-studies.html","الدراسات القانونية")))
 
 # ---- how-we-work ----
 PAGES["how-we-work.html"] = dict(
-    title="كيف نعمل ￨ PACT",
-    desc="منهجية PACT في تنفيذ الدراسات القانونية واستشارات العقود بنطاق واضح وسرّية ومخرجات قابلة للاستخدام.",
+    title="كيف نعمل ￨ PACT ARC",
+    desc="منهجية PACT ARC في تنفيذ الدراسات القانونية واستشارات العقود بنطاق واضح وسرّية ومخرجات قابلة للاستخدام.",
     active="how-we-work.html",
     body=page_hero("كيف نعمل", "المنهجية",
         "منهجية محدّدة تحترم القرار والوثيقة",
-        "كل مهمة لدى PACT تبدأ بتحديد القرار ولا تبدأ بتحميل الملفات. نعمل بمنهجية واضحة تحمي السرية وتضبط النطاق وتنقل المشروع من جمع المعلومات إلى تقرير تنفيذي مرجعي قابل للمراجعة والمتابعة.")
+        "كل مهمة لدى PACT ARC تبدأ بتحديد القرار ولا تبدأ بتحميل الملفات. نعمل بمنهجية واضحة تحمي السرية وتضبط النطاق وتنقل المشروع من جمع المعلومات إلى تقرير تنفيذي مرجعي قابل للمراجعة والمتابعة.")
     + '''
 <section class="section">
   <div class="wrap">
@@ -376,12 +376,12 @@ PAGES["how-we-work.html"] = dict(
 
 # ---- about ----
 PAGES["about.html"] = dict(
-    title="عن PACT ￨ الدراسات القانونية للمنشآت",
-    desc="تعرّف إلى PACT، شركة متخصصة في الدراسات القانونية وتشخيص وتقييم الوضع القانوني للمنشآت واستشارات عقود الشركات.",
+    title="عن PACT ARC ￨ الدراسات القانونية للمنشآت",
+    desc="تعرّف إلى PACT ARC، شركة متخصصة في الدراسات القانونية وتشخيص وتقييم الوضع القانوني للمنشآت واستشارات عقود الشركات.",
     active="about.html",
-    body=page_hero("عن PACT", "عن الشركة",
+    body=page_hero("عن PACT ARC", "عن الشركة",
         "نبني رؤية قانونية يمكن العمل بها",
-        "PACT شركة متخصصة في الدراسات القانونية وتشخيص وتقييم الوضع القانوني للمنشآت. نعتمد منهجية محددة لفحص وتحليل العقود والالتزامات النظامية والمنازعات والمطالبات والهيكل والملكية والسياسات، ونحوّلها إلى تقرير تنفيذي مرجعي يوضّح الصورة ويرتّب المخاطر ويحدّد فجوات المعلومات وخطوات المعالجة المقترحة.")
+        "PACT ARC شركة متخصصة في الدراسات القانونية وتشخيص وتقييم الوضع القانوني للمنشآت. نعتمد منهجية محددة لفحص وتحليل العقود والالتزامات النظامية والمنازعات والمطالبات والهيكل والملكية والسياسات، ونحوّلها إلى تقرير تنفيذي مرجعي يوضّح الصورة ويرتّب المخاطر ويحدّد فجوات المعلومات وخطوات المعالجة المقترحة.")
     + '''
 <section class="section">
   <div class="wrap">
@@ -427,7 +427,7 @@ PAGES["about.html"] = dict(
           <h2>ما لا ندّعيه</h2>
         </div>
         <div class="prose">
-          <p>لا تضمن PACT نجاح تمويل أو بيع أو صفقة، ولا تقدّم الدراسات القانونية بوصفها بديلاً عن الفحص المالي أو الضريبي أو التجاري.</p>
+          <p>لا تضمن PACT ARC نجاح تمويل أو بيع أو صفقة، ولا تقدّم الدراسات القانونية بوصفها بديلاً عن الفحص المالي أو الضريبي أو التجاري.</p>
           <p>يحدّد نطاق كل مهمة بوضوح، وتُعالَج المسائل التي تحتاج إلى اختصاص إضافي ضمن الترتيبات المهنية المناسبة.</p>
         </div>
       </div>
@@ -471,7 +471,7 @@ def art_cards():
     return "\n      ".join(out)
 
 PAGES["insights.html"] = dict(
-    title="رؤى قانونية للشركات ￨ PACT",
+    title="رؤى قانونية للشركات ￨ PACT ARC",
     desc="مقالات عملية حول الدراسات القانونية وتشخيص الوضع القانوني والعناية الواجبة والعقود والالتزامات للشركات.",
     active="insights.html",
     body=page_hero("الرؤى", "رؤى قانونية",
@@ -493,14 +493,14 @@ PAGES["insights.html"] = dict(
   </div>
 </section>
 '''
-    + closing("تصلك رؤى PACT قبل القرار",
+    + closing("تصلك رؤى PACT ARC قبل القرار",
         "ابدأ بلقاء تمهيدي لمناقشة القرار الذي أمامك، أو تعرّف إلى خدماتنا.",
         secondary=("legal-studies.html","الدراسات القانونية")))
 
 # ---- contact ----
 PAGES["contact.html"] = dict(
-    title="تواصل مع PACT",
-    desc="اطلب لقاءً تمهيدياً مع PACT لمناقشة الدراسات القانونية أو العناية القانونية الواجبة للصفقات أو احتياجات عقود الشركات.",
+    title="تواصل مع PACT ARC",
+    desc="اطلب لقاءً تمهيدياً مع PACT ARC لمناقشة الدراسات القانونية أو العناية القانونية الواجبة للصفقات أو احتياجات عقود الشركات.",
     active="contact.html",
     body=page_hero("تواصل معنا", "تواصل",
         "لنبدأ من القرار الذي أمامك",
@@ -604,7 +604,7 @@ HOME_SECTIONS = '''<section class="section" id="problem">
         <p style="margin-block-start:1.3em;color:var(--ink-soft)">وعندما تبقى البيانات القانونية موزّعة وغير مرتّبة، قد تتأخر القرارات أو تُبنى على معلومات غير مكتملة. الأثر لا يظهر في لحظة الوثيقة، بل في لحظة القرار الذي يستند إليها.</p>
       </div>
       <aside class="pullnote reveal" data-d="1">
-        <span class="k">دور PACT</span>
+        <span class="k">دور PACT ARC</span>
         <p>ننظّم هذه الصورة ونحوّلها إلى قراءة قانونية عملية توضّح المسائل والأولويات وفجوات المعلومات ومسار المعالجة المقترح — لتكون أساساً موثوقاً للقرار.</p>
       </aside>
     </div>
@@ -671,7 +671,7 @@ HOME_SECTIONS = '''<section class="section" id="problem">
 <section class="section" id="why">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="sec-head__top"><span class="idx">05</span><span class="eyebrow">لماذا PACT</span></div>
+      <div class="sec-head__top"><span class="idx">05</span><span class="eyebrow">لماذا PACT ARC</span></div>
       <h2>لأن المخرَج يجب أن يساعدك على الفعل</h2>
       <p class="lead">لا نقيس جودة العمل بكثرة الملاحظات، بل بقدرتك على معرفة ما تعرفه، وما لا تعرفه، وما يمثّل خطراً فعلياً، وما ينبغي فعله الآن.</p>
     </div>
@@ -703,11 +703,11 @@ HOME_SECTIONS = '''<section class="section" id="problem">
 
 PAGES["index.html"] = dict(
     title="PACT ARC",
-    desc="PACT — استشارات قانونية وعناية واجبة للمنشآت. رؤية قانونية. أثر تجاري.",
+    desc="PACT ARC — استشارات قانونية وعناية واجبة للمنشآت. رؤية قانونية. أثر تجاري.",
     active="index.html",
     body=HOME_HERO + "\n\n" + HOME_SECTIONS + "\n\n" + closing(
         "هل تحتاج إلى صورة قانونية أوضح؟",
-        "ابدأ لقاءً تمهيدياً مع PACT لتحديد القرار الذي أمامك، ونطاق الدراسة المناسب، والمعلومات اللازمة للانطلاق.",
+        "ابدأ لقاءً تمهيدياً مع PACT ARC لتحديد القرار الذي أمامك، ونطاق الدراسة المناسب، والمعلومات اللازمة للانطلاق.",
         secondary=("legal-studies.html","استكشف خدماتنا")))
 
 # ---------------------------------------------------------------- write
