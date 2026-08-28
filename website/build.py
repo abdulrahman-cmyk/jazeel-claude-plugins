@@ -8,10 +8,45 @@ dropping onto any static host).
 
 Run:  python3 build.py
 """
-import os, re, pathlib
+import os, re, json, pathlib
 
 ROOT = pathlib.Path(__file__).parent
 ASSETS = ROOT / "assets"
+DOMAIN = "https://pactadvisory.com"
+
+JSONLD = {
+  "@context": "https://schema.org",
+  "@type": "LegalService",
+  "name": "PACT ARC",
+  "alternateName": "PACT ARC — Legal Advisory & Due Diligence",
+  "description": "شركة متخصصة في الدراسات القانونية وتشخيص وتقييم الوضع القانوني للمنشآت، والعناية القانونية الواجبة، واستشارات عقود الشركات.",
+  "url": DOMAIN + "/",
+  "image": DOMAIN + "/assets/og-default.png",
+  "areaServed": ["SA", "AE", "GB", "US"],
+  "knowsLanguage": ["ar", "en"],
+  "slogan": "رؤية قانونية. أثر تجاري.",
+  "location": [{"@type": "Place", "name": n} for n in ["London", "Dubai", "Riyadh", "New York"]],
+  "serviceType": ["الدراسات القانونية", "تشخيص الوضع القانوني", "العناية القانونية الواجبة", "استشارات عقود الشركات"],
+}
+
+def seo_tags(title, desc, slug):
+    url = f"{DOMAIN}/{slug}"
+    img = f"{DOMAIN}/assets/og-default.png"
+    return (
+      f'<link rel="canonical" href="{url}" />\n'
+      f'<meta property="og:type" content="website" />\n'
+      f'<meta property="og:site_name" content="PACT ARC" />\n'
+      f'<meta property="og:locale" content="ar_AR" />\n'
+      f'<meta property="og:title" content="{title}" />\n'
+      f'<meta property="og:description" content="{desc}" />\n'
+      f'<meta property="og:url" content="{url}" />\n'
+      f'<meta property="og:image" content="{img}" />\n'
+      f'<meta name="twitter:card" content="summary_large_image" />\n'
+      f'<meta name="twitter:title" content="{title}" />\n'
+      f'<meta name="twitter:description" content="{desc}" />\n'
+      f'<meta name="twitter:image" content="{img}" />\n'
+      f'<script type="application/ld+json">{json.dumps(JSONLD, ensure_ascii=False)}</script>'
+    )
 
 FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com" />\n'
     '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />\n'
@@ -134,21 +169,24 @@ def page_hero(crumb_label, eyebrow, h1, lead):
 
 META = '<meta charset="utf-8" />\n<meta name="viewport" content="width=device-width, initial-scale=1" />'
 
-def head(title, desc, css=None):
+def head(title, desc, css=None, slug=""):
     styles = f"<style>\n{css}\n</style>" if css else '<link rel="stylesheet" href="assets/pact.css" />'
-    return f'{META}\n<title>{title}</title>\n<meta name="description" content="{desc}" />\n{FONTS}\n{styles}'
+    return (f'{META}\n<meta name="theme-color" content="#0D1B2A" />\n'
+            f'<title>{title}</title>\n<meta name="description" content="{desc}" />\n'
+            f'{seo_tags(title, desc, slug)}\n{FONTS}\n{styles}')
 
 def chrome(active, body):
-    return f'{header(active)}\n\n{body}\n\n{FOOTER}'
+    skip = '<a class="skip" href="#main">تخطٍّ إلى المحتوى</a>'
+    return f'{skip}\n{header(active)}\n\n<main id="main">\n{body}\n</main>\n\n{FOOTER}'
 
-def fragment(title, desc, active, body, css=None, js=None):
+def fragment(title, desc, active, body, css=None, js=None, slug=""):
     """Artifact/dev fragment — no <html>/<head>/<body> skeleton."""
     script = f"<script>\n{js}\n</script>" if js else '<script src="assets/pact.js"></script>'
-    return f'{head(title, desc, css)}\n\n{chrome(active, body)}\n\n{script}\n'
+    return f'{head(title, desc, css, slug)}\n\n{chrome(active, body)}\n\n{script}\n'
 
-def full_document(title, desc, active, body, css, js):
+def full_document(title, desc, active, body, css, js, slug=""):
     """Standalone, deployable document."""
-    return (f'<!doctype html>\n<html dir="rtl" lang="ar">\n<head>\n{head(title, desc, css)}\n</head>\n'
+    return (f'<!doctype html>\n<html dir="rtl" lang="ar">\n<head>\n{head(title, desc, css, slug)}\n</head>\n'
             f'<body>\n{chrome(active, body)}\n<script>\n{js}\n</script>\n</body>\n</html>\n')
 
 # ---------------------------------------------------------------- pages
@@ -562,6 +600,7 @@ PAGES["contact.html"] = dict(
 
 # ---- index ----
 HOME_HERO = '''<section class="hero">
+  <div class="hero__glow" aria-hidden="true"></div>
   <div class="hero__cols" aria-hidden="true">
     <svg preserveAspectRatio="xMaxYMid slice" viewBox="0 0 520 600">
       <line x1="60" y1="0" x2="60" y2="600"/><line x1="160" y1="0" x2="160" y2="600"/>
@@ -611,6 +650,31 @@ HOME_SECTIONS = '''<section class="section" id="problem">
   </div>
 </section>
 
+<section class="section">
+  <div class="wrap figband">
+    <figure class="figure reveal">
+      <span class="slot">صورة — تُضاف لاحقاً</span>
+      <svg class="figure__art" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+        <path d="M40 62 L200 20 L360 62 Z" class="fill"/>
+        <path d="M40 62 L200 20 L360 62"/>
+        <line x1="36" y1="62" x2="364" y2="62"/><line x1="36" y1="72" x2="364" y2="72"/>
+        <line x1="74" y1="72" x2="74" y2="250"/><line x1="132" y1="72" x2="132" y2="250"/>
+        <line x1="190" y1="72" x2="190" y2="250"/><line x1="248" y1="72" x2="248" y2="250"/>
+        <line x1="306" y1="72" x2="306" y2="250"/>
+        <line x1="28" y1="250" x2="372" y2="250"/><line x1="28" y1="262" x2="372" y2="262"/>
+      </svg>
+      <figcaption>منهجية تحترم القرار والوثيقة</figcaption>
+    </figure>
+    <div class="figband__txt reveal" data-d="1">
+      <span class="eyebrow" style="margin-block-end:1rem">منهجيتنا</span>
+      <h2>من ملفات متفرقة إلى قرار يمكن الاعتماد عليه</h2>
+      <p>نبدأ بتحديد القرار لا بتحميل الملفات. نضبط النطاق ونحمي السرّية، ثم ننقل المشروع من جمع المعلومات إلى تقرير تنفيذي مرجعي قابل للمراجعة والمتابعة.</p>
+      <p>الأثر لا يظهر في لحظة الوثيقة، بل في لحظة القرار الذي يستند إليها — ولذلك نصمّم عملنا حول القرار.</p>
+      <a href="how-we-work.html" class="btn btn--ghost" style="margin-block-start:1.5rem">تعرّف إلى المنهجية <span class="ar">←</span></a>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="when">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -652,6 +716,24 @@ HOME_SECTIONS = '''<section class="section" id="problem">
   </div>
 </section>
 
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">القطاعات</span>
+      <h2>من نخدم</h2>
+      <p class="lead">نعمل مع المنشآت والمُموّلين والمستثمرين حين يصبح الفهم المنظّم للوضع القانوني أساساً لقرار مهم.</p>
+    </div>
+    <div class="sectors reveal" data-d="1">
+      <span class="sector">الشركات العائلية</span>
+      <span class="sector">المنشآت الناشئة والنامية</span>
+      <span class="sector">الاستثمار والتمويل</span>
+      <span class="sector">الاستحواذ والشراكات</span>
+      <span class="sector">إعادة الهيكلة والحوكمة</span>
+      <span class="sector">المكاتب العائلية والمستثمرون</span>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="how">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -668,6 +750,20 @@ HOME_SECTIONS = '''<section class="section" id="problem">
   </div>
 </section>
 
+<section class="section">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="eyebrow">المنهجية بالأرقام</span>
+      <h2>منتَج تشخيصي واضح المدخلات والمخرجات</h2>
+    </div>
+    <div class="stats reveal" data-d="1">
+      <div class="stat"><div class="stat__k">07</div><div class="stat__l">مراحل تنفيذ منضبطة، من تأهيل الاحتياج إلى تسليم التقرير.</div></div>
+      <div class="stat"><div class="stat__k">04</div><div class="stat__l">مخرجات لكل دراسة: تقرير تنفيذي، خريطة مخاطر، فجوات معلومات، خطة معالجة.</div></div>
+      <div class="stat"><div class="stat__k">100%</div><div class="stat__l">ضمن نطاق مكتوب وترتيبات سرّية تُستكمل قبل مشاركة أي ملف.</div></div>
+    </div>
+  </div>
+</section>
+
 <section class="section" id="why">
   <div class="wrap">
     <div class="sec-head reveal">
@@ -681,6 +777,15 @@ HOME_SECTIONS = '''<section class="section" id="problem">
       <div class="principle reveal" data-d="2"><h3>السرّية</h3><p>نحترم حساسية الوثائق والمعلومات، ونعالجها ضمن ترتيبات مهنية واضحة.</p></div>
       <div class="principle reveal" data-d="3"><h3>العملية</h3><p>نقدّم خطوات معالجة مقترحة ومساراً واضحاً للمتابعة والتنفيذ.</p></div>
     </div>
+  </div>
+</section>
+
+<section class="statband">
+  <svg class="statband__arc" viewBox="0 0 520 400" aria-hidden="true"><path d="M20 380 C 170 90, 350 90, 500 380"/></svg>
+  <div class="statband__in reveal">
+    <span class="mark">”</span>
+    <blockquote>لا نقيس جودة العمل بكثرة الملاحظات، بل بقدرتك على معرفة ما يجب فعله الآن.</blockquote>
+    <cite>— مبدأ العمل في PACT ARC</cite>
   </div>
 </section>
 
@@ -718,18 +823,29 @@ def build():
     for fname, cfg in PAGES.items():
         t, d, a, b = cfg["title"], cfg["desc"], cfg["active"], cfg["body"]
         # 1) repo source: fragment linking external assets
-        (ROOT / fname).write_text(fragment(t, d, a, b), encoding="utf-8")
+        (ROOT / fname).write_text(fragment(t, d, a, b, slug=fname), encoding="utf-8")
         # 2) dist: standalone deployable document, assets inlined
-        (dist / fname).write_text(full_document(t, d, a, b, css, js), encoding="utf-8")
+        (dist / fname).write_text(full_document(t, d, a, b, css, js, slug=fname), encoding="utf-8")
         print("wrote", fname)
-    print(f"built {len(PAGES)} pages -> ./ (source) and ./dist (standalone)")
+
+    # sitemap + robots
+    urls = "\n".join(
+        f'  <url><loc>{DOMAIN}/{f}</loc><changefreq>monthly</changefreq></url>'
+        for f in PAGES)
+    sitemap = ('<?xml version="1.0" encoding="UTF-8"?>\n'
+               '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+               f'{urls}\n</urlset>\n')
+    (ROOT / "sitemap.xml").write_text(sitemap, encoding="utf-8")
+    (ROOT / "robots.txt").write_text(
+        f"User-agent: *\nAllow: /\nSitemap: {DOMAIN}/sitemap.xml\n", encoding="utf-8")
+    print(f"built {len(PAGES)} pages -> ./ (source) and ./dist (standalone); sitemap.xml + robots.txt")
 
 def artifact_fragment(fname):
     """Return a self-contained fragment (inline css/js, no skeleton) for publishing."""
     css = (ASSETS / "pact.css").read_text(encoding="utf-8")
     js = (ASSETS / "pact.js").read_text(encoding="utf-8")
     cfg = PAGES[fname]
-    return fragment(cfg["title"], cfg["desc"], cfg["active"], cfg["body"], css=css, js=js)
+    return fragment(cfg["title"], cfg["desc"], cfg["active"], cfg["body"], css=css, js=js, slug=fname)
 
 if __name__ == "__main__":
     build()
